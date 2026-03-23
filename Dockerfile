@@ -1,6 +1,6 @@
 FROM node:20-slim
 
-# Install dependencies for canvas/music if needed
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     python3 \
     make \
@@ -10,11 +10,9 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-
 RUN npm install
 
 COPY . .
 
-# We move the deploy command to the final execution 
-# to ensure environment variables are available.
-CMD ["sh", "-c", "npm run deploy && npm start"]
+# This tells Docker how to start the bot, using your chained command
+CMD ["sh", "-c", "npm run deploy && node index.js"]
