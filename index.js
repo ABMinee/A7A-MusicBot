@@ -1,3 +1,6 @@
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
+});
 //JotaroKujo0525 note, this is a deed that i should've done a long time ago
 require('dotenv').config()
 
